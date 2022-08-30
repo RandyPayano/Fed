@@ -1,8 +1,8 @@
 # tests/test_tmdbwrapper.py
 
-from Fed import *
+from Series import *
 
-def test_client():
+def test_series():
     """Tests that the client is able to authorize"""
 
     response = Series(apikey = "127d428fd5917c2a35047e76f0b92fd0", 
@@ -10,5 +10,5 @@ def test_client():
                 )
     
     assert response.release()[0] == 200, 'more about the error'
-
-test_client()
+    print("-- test_series-- : passed")
+test_series()
