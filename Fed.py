@@ -1,8 +1,8 @@
 import requests 
 
 class Fed:
-    def __init__(self, key):
-        self.apikey = key
+    def __init__(self, apikey):
+        self.apikey = apikey
         self.url_base = "https://api.stlouisfed.org/fred/"
 
     def get(self, URL, parameter = {}):
@@ -13,6 +13,7 @@ class Fed:
                 url_params[key] = value
                 
         response = requests.get(URL, params = url_params)
+        print(response.text)
         return response.status_code, response.text    
 
     def _create_path(self, *args):
@@ -29,7 +30,7 @@ class Series(Fed):
         super().__init__(apikey)
         self.url_base = self._create_path("series") 
         self.series_id = series_id
-        self.get()
+        self.get(self.url_base, {"series_id": self.series_id})
     def categories():
         pass
     def observations():
