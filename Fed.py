@@ -21,19 +21,98 @@ class Fed:
         return path 
     def series(self):
         return Series(self.apikey)
+
+######################################################################################3
 class Series(Fed):
     def __init__(self, apikey, series_id):
         super().__init__(apikey)
         self.url_base = self._create_path("series") 
         self.series_id = series_id
         
-    def release(self):
-        url = self.url_base + "/release"
-        return self.get(url, {"series_id": self.series_id})
+        def categories(self):
+            """Get the categories for an economic data series.
+            Returns:
+                _type_: _description_
+            """
 
-    def tags(self):
-        url = self.url_base + "/tags"
-        return self.get(url, {"series_id": self.series_id})
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+
+        def observations(self):
+            """Get the observations or data values for an economic data series.
+
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+
+        def release(self):
+            """Get the release for an economic data series.
+
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+
+        def search(self):
+            """Get economic data series that match keywords.
+
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+
+        def search_tags(self):
+            """Get the tags for a series search.
+
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+        def search_related_tags_tags(self):
+            """ Get the related tags for a series search.
+
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+            
+        def tags(self):
+            """ Get the tags for an economic data series.
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/tags"
+            return self.get(url, {"series_id": self.series_id})
+            
+        def release(self):
+            """_summary_
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+
+        def updates(self):
+            """Get economic data series sorted by when observations were updated on the FRED® server.
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/release"
+            return self.get(url, {"series_id": self.series_id})
+
+        def vintagedates(self):
+            """Get the dates in history when a series' data values were revised or new data values were released.
+            Returns:
+                _type_: _description_
+            """
+            url = self.url_base + "/tags"
+            return self.get(url, {"series_id": self.series_id})
 
 
 
