@@ -5,7 +5,8 @@ class Fed:
         self.apikey = key
         self.url_base = "https://api.stlouisfed.org/fred/"
 
-    def get(self, URL, parameter = None):
+    def get(self, URL, parameter = {}):
+        parameter['api_key'] = self.apikey
         url_params = {}
         for key, value in parameter.items():
             if value is not None:
@@ -18,27 +19,33 @@ class Fed:
         """Create the URL path with the Fred endpoint and given arguments."""
         args = filter(None, args)
         path = self.url_base + '/'.join(args)
-        return path
-
-
-class series(Fed):
-    def __init__(self, apikey):
+        return path 
+    ###############################################
+    def series(self):
+        return Series(self.apikey)
+    ###############################################
+class Series(Fed):
+    def __init__(self, apikey, series_id):
         super().__init__(apikey)
-        self.url_base = "https://api.stlouisfed.org/fred/series/"
+        self.url_base = self._create_path("series") 
+        self.series_id = series_id
+        self.get()
     def categories():
         pass
     def observations():
         pass
-    def release():
-        pass
-
 class Releases(Fed):
     pass
 
-#https://api.stlouisfed.org/fred/series?series_id=GNPCA&api_key=127d428fd5917c2a35047e76f0b92fd0
-a = series("127d428fd5917c2a35047e76f0b92fd0")
-a._create_path("series", "nitida")
+#https://api.stlouisfed.org/fred/series?api_key=127d428fd5917c2a35047e76f0b92fd0series_id=GNPCA&
+#a = series("127d428fd5917c2a35047e76f0b92fd0")
+test = Series(
+        apikey = "127d428fd5917c2a35047e76f0b92fd0", 
+        series_id = 'GNPCA'
+    )
 
+
+print(test.__dict__)
 
 
 
