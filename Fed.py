@@ -11,7 +11,8 @@ class Fed:
         for key, value in parameter.items():
             if value is not None:
                 url_params[key] = value
-                
+        print("URL:", URL)
+        print("PARAMS:", url_params)
         response = requests.get(URL, params = url_params)
         print(response.text)
         return response.status_code, response.text    
@@ -30,9 +31,12 @@ class Series(Fed):
         super().__init__(apikey)
         self.url_base = self._create_path("series") 
         self.series_id = series_id
-        self.get(self.url_base, {"series_id": self.series_id})
-    def categories():
-        pass
+        
+    def release(self):
+        url = self.url_base + "/release"
+        print(url)
+        return self.get(url, {"series_id": self.series_id})
+
     def observations():
         pass
 class Releases(Fed):
@@ -45,7 +49,7 @@ test = Series(
         series_id = 'GNPCA'
     )
 
-
+test.release()
 print(test.__dict__)
 
 
