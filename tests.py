@@ -8,10 +8,7 @@ def test_client():
     response = Series(apikey = "127d428fd5917c2a35047e76f0b92fd0", 
                       series_id = 'GNPCA'
                 )
-    print("===================")
-    print(response.__dict__)
-    #assert isinstance(response, dict)
-    assert response is not None
-
+    
+    assert response.release()[0] == 200, 'more about the error'
 
 test_client()

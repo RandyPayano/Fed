@@ -11,10 +11,7 @@ class Fed:
         for key, value in parameter.items():
             if value is not None:
                 url_params[key] = value
-        print("URL:", URL)
-        print("PARAMS:", url_params)
         response = requests.get(URL, params = url_params)
-        print(response.text)
         return response.status_code, response.text    
 
     def _create_path(self, *args):
@@ -22,10 +19,8 @@ class Fed:
         args = filter(None, args)
         path = self.url_base + '/'.join(args)
         return path 
-    ###############################################
     def series(self):
         return Series(self.apikey)
-    ###############################################
 class Series(Fed):
     def __init__(self, apikey, series_id):
         super().__init__(apikey)
@@ -34,24 +29,20 @@ class Series(Fed):
         
     def release(self):
         url = self.url_base + "/release"
-        print(url)
         return self.get(url, {"series_id": self.series_id})
 
-    def observations():
-        pass
-class Releases(Fed):
-    pass
+    def tags(self):
+        url = self.url_base + "/tags"
+        return self.get(url, {"series_id": self.series_id})
 
-#https://api.stlouisfed.org/fred/series?api_key=127d428fd5917c2a35047e76f0b92fd0series_id=GNPCA&
-#a = series("127d428fd5917c2a35047e76f0b92fd0")
+
+
 test = Series(
         apikey = "127d428fd5917c2a35047e76f0b92fd0", 
         series_id = 'GNPCA'
     )
 
 test.release()
-print(test.__dict__)
-
 
 
 
