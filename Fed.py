@@ -11,6 +11,7 @@ class Fed:
         for key, value in parameter.items():
             if value is not None:
                 url_params[key] = value
+        print(URL)
         response = requests.get(URL, params = url_params)
         return response.status_code, response.text    
 
@@ -19,6 +20,3 @@ class Fed:
         args = filter(None, args)
         path = self.url_base + '/'.join(args)
         return path 
-    def series(self, series_id):
-        return Series(self.apikey, series_id)
-######################################################################################3
