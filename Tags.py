@@ -23,10 +23,14 @@ class Tags(Fed):
         res = self.get(url, {"source_id": source_id})
         return res
 
-    def tags_series(self, *tags_list):
+    def tags_series(self, *tag_names):
+        tag_names = {"tag_names": (None if not tag_names else tag_names)}
         """fred/source/releases - Get the releases for a source.
         Returns:
             _type_: _description_
         """
         url = self.url_base + "/series"
-        return self.get(url, {"tag_names": [tag for tag in tags_list]})
+        return self.get(url, tag_names)
+
+
+#Tags(Tags.dev_key).tags_series()

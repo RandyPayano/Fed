@@ -9,12 +9,13 @@ class Fed:
         self.url_base = "https://api.stlouisfed.org/fred/"
 
     def get(self, URL, parameter={}):
-        parameter['api_key'] = self.apikey
+        #parameter['api_key'] = self.apikey
         url_params = {}
         for key, value in parameter.items():
             if value is not None:
                 url_params[key] = value
-        print(URL)
+        url_params.update({"file_type": "json",
+                            'api_key': self.apikey})
         response = requests.get(URL, params=url_params)
         return response.status_code, response.text
 
